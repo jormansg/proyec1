@@ -3,13 +3,13 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
 
-constexpr uint32_t DUTY_RUN = 200;   // ~78% de 255
+constexpr uint32_t DUTY_RUN = 200;  
 
 static SemaphoreHandle_t fsmMutex = nullptr;
 static State    curState  = State::IDLE;
 static uint32_t enteredMs = 0;
 
-// ---- acciones / handlers: reciben el estado actual y devuelven el siguiente ----
+// ---- acciones: reciben el estado actual y devuelven el siguiente ----
 using Handler = State (*)(State);
 
 static State fsmStay(State s)  { return s; }
