@@ -1,29 +1,13 @@
-#include <stdint.h>
-#include <stddef.h>
+#pragma once
+#include <Arduino.h>
 
-enum class State: uint8_t {
-    IDLE=0,
-    RUNNING,
-    FAULT,
-    COUNT
-};
+// ---- estados ----
+enum class State : uint8_t { IDLE, RUNNING, FAULT, COUNT };
 
-enum class Event: uint8_t {
-    NONE=0,
-    START,
-    STOP,
-    RESET,
-    COUNT
-};
+// ---- eventos ----
+enum class Event : uint8_t { NONE, BTN_PRESS, TIMEOUT, COUNT };
 
-struct Transition {
-    State nextState;
-    void (*action)();
-};
-
-extern const Transition TransitionFSM[static_cast<size_t>(State::COUNT)][static_cast<size_t>(Event::COUNT)];
-
-extern void onStart();
-extern void onFault();
-extern void onReset();
-extern void onNoOp();
+void  fsmInit();                       // crea el mutex
+void  fsmDispatch(Event e);            // despacha un evento por la matriz
+State fsmGetState();                   // lectura segura
+bool  fsmTimedOut(uint32_t limitMs);   // true si lleva más de limitMs en RUNNING
