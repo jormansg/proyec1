@@ -1,0 +1,21 @@
+{
+  "project": "banda transportadora",
+  "board": "IdeaBoard (ESP32)",
+  "perifericos": [
+    {
+      "componente": "motor puente H A (L9110S)",
+      "pin": 12,
+      "tipo": "output analog (PWM)"
+    },
+    {
+      "componente": "motor puente H B (L9110S)",
+      "pin": 14,
+      "tipo": "output digital"
+    },
+    {
+      "componente": "microinterruptor de paro de emergencia",
+      "pin": 33,
+      "tipo": "input digital (INPUT_PULLUP, interrupcion FALLING)"
+    }
+  ]
+}
